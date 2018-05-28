@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {
   Text,
-  View, 
+  View,
   Button
 } from 'react-native';
 
+import Styles from './../../style/styles'
 class HomeScreen extends Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={Styles.containerStyles} >
         <Text>Home Screen</Text>
         <Button
           title="Go to Details"

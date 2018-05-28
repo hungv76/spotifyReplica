@@ -13,12 +13,19 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import qs from 'qs';
-import { createStackNavigator } from 'react-navigation';
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+  createSwitchNavigator
+} from 'react-navigation';
 
-import HomeScreen from './src/screens/HomeScreen';
-import DetailsScreen from './src/screens/DetailScreen';
+import HomeScreen from './src/screens/home-stack/HomeScreen';
+import DetailsScreen from './src/screens/home-stack/DetailScreen';
+import ArtistScreen from './src/screens/artist-stack/ArtistScreen';
+import TopSongScreen from './src/screens/top-song-stack/TopSongScreen';
+import MyScreen from './src/screens/MyScreen';
 
-const RootStack = createStackNavigator(
+var RootStack = createStackNavigator(
   {
     Home: HomeScreen,
     Details: DetailsScreen,
@@ -31,9 +38,17 @@ const RootStack = createStackNavigator(
 class App extends Component {
   render() {
     return (
-      <RootStack />
+      <Tabs />
     );
   }
 }
 
-export default 　App;
+
+var Tabs = createBottomTabNavigator({
+  Home: HomeScreen,
+  Artist: ArtistScreen,
+  'Top Song': TopSongScreen,
+  "My Page": MyScreen
+});
+
+export default App;
