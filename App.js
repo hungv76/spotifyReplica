@@ -25,7 +25,7 @@ import ArtistScreen from './src/screens/artist-stack/ArtistScreen';
 import TopSongScreen from './src/screens/top-song-stack/TopSongScreen';
 import MyScreen from './src/screens/MyScreen';
 
-var RootStack = createStackNavigator(
+const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Details: DetailsScreen,
@@ -43,9 +43,8 @@ class App extends Component {
   }
 }
 
-
-var Tabs = createBottomTabNavigator({
-  Home: HomeScreen,
+const Tabs = createBottomTabNavigator({
+  Home: HomeStack,
   Artist: ArtistScreen,
   'Top Song': TopSongScreen,
   "My Page": MyScreen
