@@ -6,42 +6,29 @@ import {
   ScrollView
 } from 'react-native';
 
-import Styles from './../../style/styles'
+import Styles from './../../style/styles';
+import HorizontalPlaylistList from './components/HorizontalPlaylistList';
+
 class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Home',
   }
   render() {
     return (
-      <ScrollView 
-      horizontal={true}
-      style={{ flex: 1, flexDirection: 'row', }} >
-        <View style={homeScreenStyles}>
-          <View style={{width: 100, height: 100, backgroundColor: '#000', margin: 10}}>
-            
-          </View>
-          <View style={{width: 100, height: 100, backgroundColor: '#000', margin: 10}}>
-            
-          </View>
-          <View style={{width: 100, height: 100, backgroundColor: '#000', margin: 10}}>
-            
-          </View>
-          <View style={{width: 100, height: 100, backgroundColor: '#000', margin: 10}}>
-            
-          </View>
-        </View>
+      <ScrollView style={homeScreenStyles}>
+        <HorizontalPlaylistList/>
       </ScrollView>
+
     );
   }
 }
 
 const homeScreenStyles = {
   flex: 1,
-  flexDirection: 'row',
-  backgroundColor: '#bbb',
-  height: 150,
-  justifyContent: 'center',
-  alignItems: 'center'
+  flexDirection: 'column',
+  backgroundColor: '#ccc',
+  // justifyContent: 'center',
+  // alignItems: 'center'
 
 }
 
