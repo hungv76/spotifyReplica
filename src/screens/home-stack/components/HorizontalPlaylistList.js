@@ -4,20 +4,34 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
+import Card from './Card';
 
 class HorizontalPlaylistList extends Component {
+  constructor(props) {
+    super(props);
+    this.renderCardData = this.renderCardData.bind(this);
+  }
+  renderCardData() {
+    return this.props.playlists.map(playlist =>
+      (<Card
+        key={playlist.id}
+        image={playlist.images[0].url}
+        name={playlist.name}
+      />)
+    );
+  }
+
   render() {
     return (
       <ScrollView
-        horizontal={true}
+        contentContainerStyle={{ alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}
+        showsHorizontalScrollIndicator={false}
+        horizontal
         style={{
-          flex: 1,
-          flexDirection: 'row',
-          height: 200,
-          backgroundColor: '#fff',
+          height: 240,
         }}
       >
-        <Text>Hello</Text>
+        {this.renderCardData()}
       </ScrollView>
     );
   }
