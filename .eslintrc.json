@@ -4,6 +4,14 @@
         "react/prefer-stateless-function": "off",
         "react/prop-types": "off",
         "no-console": "off",
-        "react/jsx-filename-extension": "off"
+        "react/jsx-filename-extension": "off",
+        "prefer-const": "off",
+        "arrow-body-style": "off"
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module",
+        "allowImportExportEverywhere": false,
+        "codeFrame": false
     }
 }

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-} from 'react-native';
+import { ScrollView } from 'react-native';
 import Card from './Card';
 
 class HorizontalPlaylistList extends Component {
@@ -17,8 +13,7 @@ class HorizontalPlaylistList extends Component {
         key={playlist.id}
         image={playlist.images[0].url}
         name={playlist.name}
-      />)
-    );
+      />));
   }
 
   render() {

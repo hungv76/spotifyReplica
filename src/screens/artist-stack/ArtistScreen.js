@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  Button
+  Button,
 } from 'react-native';
 
-import Styles from './../../style/styles'
+import Styles from './../../style/styles';
+
 class ArtistScreen extends Component {
   render() {
     return (

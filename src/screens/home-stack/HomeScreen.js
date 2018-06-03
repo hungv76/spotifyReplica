@@ -2,40 +2,44 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  Button,
-  ScrollView
+  ScrollView,
 } from 'react-native';
-
-import Styles from './../../style/styles';
-import HorizontalPlaylistList from './components/HorizontalPlaylistList';
 import axios from 'axios';
-import qs from 'qs';
+
+import HorizontalPlaylistList from './components/HorizontalPlaylistList';
+
+const homeScreenStyles = {
+  flex: 1,
+  flexDirection: 'column',
+  backgroundColor: '#121212',
+};
 
 class HomeScreen extends Component {
+  static navigationOptions = {
+    title: 'Home',
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
     this.getCategoriesData();
   }
-  static navigationOptions = {
-    title: 'Home',
-  }
 
   async getCategoriesData() {
-    let auth_token = 'Bearer BQCcq2k45K2BK5sKRD-j_Y1eDp1qzzEe9_N4WBd1rcgVCPr6pztXdr0jSXCL5MmUQ5FoaiU-oud2kN3WJgQ';
-    let categories = await axios({
+    const authToken = 'Bearer BQCcq2k45K2BK5sKRD-j_Y1eDp1qzzEe9_N4WBd1rcgVCPr6pztXdr0jSXCL5MmUQ5FoaiU-oud2kN3WJgQ';
+    const categories = await axios({
       method: 'get',
       headers: {
-        'Authorization': auth_token,
+        Authorization: authToken,
       },
-      url: 'https://api.spotify.com/v1/browse/categories?limit=6'
+      url: 'https://api.spotify.com/v1/browse/categories?limit=6',
     }).then(response => response.data.categories.items);
 
-    let newCategories = await Promise.all(categories.map(async (category) => {
+    const newCategories = await Promise.all(categories.map(async (category) => {
       let playlist = await axios({
         method: 'get',
         headers: {
-          'Authorization': auth_token,
+          Authorization: authToken,
         },
         url: `https://api.spotify.com/v1/browse/categories/${category.id}/playlists?limit=10`,
       }).then(response => response.data.playlists.items);
@@ -46,15 +50,15 @@ class HomeScreen extends Component {
     }));
 
     this.setState({
-      categories: newCategories
-    })
+      categories: newCategories,
+    });
   }
 
   renderCategories() {
     if (this.state.categories) {
-      let categories = this.state.categories;
+      let { categories } = this.state;
       return (
-        categories.map(category => {
+        categories.map((category) => {
           return (
             <View
               key={category.id}
@@ -69,14 +73,15 @@ class HomeScreen extends Component {
                   fontWeight: 'bold',
                   color: '#fff',
                 }}
-              >{category.name}</Text>
+              >{category.name}
+              </Text>
               <HorizontalPlaylistList playlists={category.playlist} />
             </View>
-          )
+          );
         })
-      )
+      );
     }
-
+    return (<Text> Loading... </Text>);
   }
 
   render() {
@@ -89,12 +94,6 @@ class HomeScreen extends Component {
 
     );
   }
-}
-
-const homeScreenStyles = {
-  flex: 1,
-  flexDirection: 'column',
-  backgroundColor: '#121212',
 }
 
 export default HomeScreen;

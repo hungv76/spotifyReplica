@@ -5,18 +5,10 @@
  */
 
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import axios from 'axios';
-import qs from 'qs';
+import {} from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,
-  createSwitchNavigator
 } from 'react-navigation';
 
 import HomeScreen from './src/screens/home-stack/HomeScreen';
@@ -47,7 +39,7 @@ const Tabs = createBottomTabNavigator({
   Home: HomeStack,
   Artist: ArtistScreen,
   'Top Song': TopSongScreen,
-  'My Page': MyScreen
+  'My Page': MyScreen,
 });
 
 export default App;
