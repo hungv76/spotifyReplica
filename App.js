@@ -32,7 +32,7 @@ const HomeStack = createStackNavigator(
   },
   {
     initialRouteName: 'Home',
-  }
+  },
 );
 
 class App extends Component {
@@ -47,7 +47,7 @@ const Tabs = createBottomTabNavigator({
   Home: HomeStack,
   Artist: ArtistScreen,
   'Top Song': TopSongScreen,
-  "My Page": MyScreen
+  'My Page': MyScreen
 });
 
 export default App;
