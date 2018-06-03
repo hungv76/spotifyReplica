@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, StatusBar } from 'react';
 import {
   Text,
   View,
@@ -17,6 +17,12 @@ const homeScreenStyles = {
 class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Home',
+    headerStyle: {
+      backgroundColor: '#282828',
+      borderBottomWidth: 0,
+    },
+    headerTintColor: '#fff',
+
   }
 
   constructor(props) {
@@ -26,7 +32,7 @@ class HomeScreen extends Component {
   }
 
   async getCategoriesData() {
-    const authToken = 'Bearer BQCcq2k45K2BK5sKRD-j_Y1eDp1qzzEe9_N4WBd1rcgVCPr6pztXdr0jSXCL5MmUQ5FoaiU-oud2kN3WJgQ';
+    const authToken = 'Bearer BQDyq_H8sW9iBdEBEptDY3744OiBxmb4mwvHDw2TNvixpOGej_QMX-izfmjyDVVT_P4hla6Ve92N27HwoPk';
     const categories = await axios({
       method: 'get',
       headers: {
@@ -60,6 +66,7 @@ class HomeScreen extends Component {
       return (
         categories.map((category) => {
           return (
+
             <View
               key={category.id}
               style={{
@@ -67,6 +74,8 @@ class HomeScreen extends Component {
                 marginTop: 10,
               }}
             >
+              {/* <StatusBar barStyle="dark-content" hidden={false} /> */}
+
               <Text
                 style={{
                   fontSize: 20,
@@ -75,7 +84,10 @@ class HomeScreen extends Component {
                 }}
               >{category.name}
               </Text>
-              <HorizontalPlaylistList playlists={category.playlist} />
+              <HorizontalPlaylistList
+                playlists={category.playlist}
+                navigation={this.props.navigation}
+              />
             </View>
           );
         })

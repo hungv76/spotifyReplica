@@ -6,7 +6,8 @@
         "no-console": "off",
         "react/jsx-filename-extension": "off",
         "prefer-const": "off",
-        "arrow-body-style": "off"
+        "arrow-body-style": "off",
+        "object-curly-newline": "off"
     },
     "parser": "babel-eslint",
     "parserOptions": {

@@ -3,18 +3,63 @@ import {
   View,
   Text,
   Image,
+  TouchableOpacity,
 } from 'react-native';
+import axios from 'axios';
 
 class Card extends Component {
+  constructor(props) {
+    super(props);
+    this.handleOnPress = this.handleOnPress.bind(this);
+    this.state = {
+      playlist: {
+        followers: 0,
+      },
+    };
+    this.getPlaylistData().then((playlist) => {
+      this.setState({ playlist });
+    });
+  }
+
+  async getPlaylistData() {
+    const authToken = 'Bearer BQDyq_H8sW9iBdEBEptDY3744OiBxmb4mwvHDw2TNvixpOGej_QMX-izfmjyDVVT_P4hla6Ve92N27HwoPk';
+    let { playlistID } = this.props;
+    let playlist = await axios({
+      method: 'get',
+      headers: {
+        Authorization: authToken,
+      },
+      url: `https://api.spotify.com/v1/users/spotify/playlists/${playlistID}`,
+    }).then((response) => {
+      let { description, followers, tracks, images, name } = response.data;
+      return {
+        description,
+        tracks,
+        images,
+        name,
+        followers: followers.total,
+      };
+    });
+    return playlist;
+  }
+
+  handleOnPress() {
+    this.props.navigation.navigate('Details');
+  }
+
+  // renderFollowers
+
   render() {
     return (
-      <View style={{
-        height: 220,
-        width: 160,
-        // backgroundColor: '#aaa',
-        marginLeft: 10,
-        marginRight: 10,
-      }}
+      <TouchableOpacity
+        style={{
+          height: 220,
+          width: 160,
+          marginLeft: 10,
+          marginRight: 10,
+        }}
+        onPress={this.handleOnPress}
+
       >
         <Image
           source={{ uri: this.props.image }}
@@ -47,11 +92,11 @@ class Card extends Component {
               color: '#fff',
             }}
           >
-            10,000,000 Followers
+            {(this.state.playlist.followers.toLocaleString())} Followers
           </Text>
         </View>
 
-      </View>
+      </TouchableOpacity >
     );
   }
 }

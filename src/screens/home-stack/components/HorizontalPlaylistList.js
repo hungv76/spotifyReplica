@@ -13,6 +13,8 @@ class HorizontalPlaylistList extends Component {
         key={playlist.id}
         image={playlist.images[0].url}
         name={playlist.name}
+        playlistID={playlist.id}
+        navigation={this.props.navigation}
       />));
   }
 
