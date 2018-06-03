@@ -6,9 +6,13 @@ import {
 } from 'react-native';
 
 class DetailsScreen extends Component {
+  static navigationOptions = {
+    title: 'Playlist',
+  }
+
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#121212' }}>
         <Text>Details Screen</Text>
         <Button
           title="Go to Details"

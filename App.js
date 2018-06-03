@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import {} from 'react-native';
+import { } from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -23,6 +23,14 @@ const HomeStack = createStackNavigator(
     Details: DetailsScreen,
   },
   {
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#282828',
+        borderBottomWidth: 0,
+      },
+      headerTintColor: '#fff',
+      headerBackTitle: null,
+    },
     initialRouteName: 'Home',
   },
 );
@@ -35,11 +43,22 @@ class App extends Component {
   }
 }
 
-const Tabs = createBottomTabNavigator({
-  Home: HomeStack,
-  Artist: ArtistScreen,
-  'Top Song': TopSongScreen,
-  'My Page': MyScreen,
-});
+const Tabs = createBottomTabNavigator(
+  {
+    Home: HomeStack,
+    Artist: ArtistScreen,
+    'Top Song': TopSongScreen,
+    'My Page': MyScreen,
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: 'white',
+      inactiveTintColor: 'gray',
+      style: {
+        backgroundColor: '#282828',
+      },
+    },
+  },
+);
 
 export default App;

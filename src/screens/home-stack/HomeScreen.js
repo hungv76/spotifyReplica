@@ -17,12 +17,6 @@ const homeScreenStyles = {
 class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Home',
-    headerStyle: {
-      backgroundColor: '#282828',
-      borderBottomWidth: 0,
-    },
-    headerTintColor: '#fff',
-
   }
 
   constructor(props) {
@@ -32,13 +26,13 @@ class HomeScreen extends Component {
   }
 
   async getCategoriesData() {
-    const authToken = 'Bearer BQDyq_H8sW9iBdEBEptDY3744OiBxmb4mwvHDw2TNvixpOGej_QMX-izfmjyDVVT_P4hla6Ve92N27HwoPk';
+    const authToken = 'Bearer BQDq0lmtMSGYxZ9gzXAH42pTine3-Ccz5F6Ae1QdvZK2aW8hckK0ZOYhxqnvGMTZrL8IayEJA8cBJil4jEQ';
     const categories = await axios({
       method: 'get',
       headers: {
         Authorization: authToken,
       },
-      url: 'https://api.spotify.com/v1/browse/categories?limit=6',
+      url: 'https://api.spotify.com/v1/browse/categories?locale=jp&limit=10',
     }).then(response => response.data.categories.items);
 
     const newCategories = await Promise.all(categories.map(async (category) => {
@@ -48,7 +42,8 @@ class HomeScreen extends Component {
           Authorization: authToken,
         },
         url: `https://api.spotify.com/v1/browse/categories/${category.id}/playlists?limit=10`,
-      }).then(response => response.data.playlists.items);
+      }).then(response => response.data.playlists.items)
+        .catch(error => console.log(error.response));
 
       let newCategory = JSON.parse(JSON.stringify(category));
       newCategory.playlist = playlist;
@@ -74,8 +69,6 @@ class HomeScreen extends Component {
                 marginTop: 10,
               }}
             >
-              {/* <StatusBar barStyle="dark-content" hidden={false} /> */}
-
               <Text
                 style={{
                   fontSize: 20,

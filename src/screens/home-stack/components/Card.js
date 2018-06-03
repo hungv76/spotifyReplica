@@ -22,7 +22,7 @@ class Card extends Component {
   }
 
   async getPlaylistData() {
-    const authToken = 'Bearer BQDyq_H8sW9iBdEBEptDY3744OiBxmb4mwvHDw2TNvixpOGej_QMX-izfmjyDVVT_P4hla6Ve92N27HwoPk';
+    const authToken = 'Bearer BQDq0lmtMSGYxZ9gzXAH42pTine3-Ccz5F6Ae1QdvZK2aW8hckK0ZOYhxqnvGMTZrL8IayEJA8cBJil4jEQ';
     let { playlistID } = this.props;
     let playlist = await axios({
       method: 'get',
@@ -44,7 +44,7 @@ class Card extends Component {
   }
 
   handleOnPress() {
-    this.props.navigation.navigate('Details');
+    this.props.navigation.navigate('Details', { playlist: this.state.playlist });
   }
 
   // renderFollowers
