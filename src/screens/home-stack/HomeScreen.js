@@ -1,4 +1,4 @@
-import React, { Component, StatusBar } from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -26,13 +26,13 @@ class HomeScreen extends Component {
   }
 
   async getCategoriesData() {
-    const authToken = 'Bearer BQDq0lmtMSGYxZ9gzXAH42pTine3-Ccz5F6Ae1QdvZK2aW8hckK0ZOYhxqnvGMTZrL8IayEJA8cBJil4jEQ';
+    const authToken = 'Bearer BQDtyG9P-jYfIpzIGPAh7X9sI0rCp7TM0VAEyi71n6dnr7CYWN5z18KSFvovqEfKNvv7RSgqrfRik_vCPQs';
     const categories = await axios({
       method: 'get',
       headers: {
         Authorization: authToken,
       },
-      url: 'https://api.spotify.com/v1/browse/categories?locale=jp&limit=10',
+      url: 'https://api.spotify.com/v1/browse/categories?&limit=5',
     }).then(response => response.data.categories.items);
 
     const newCategories = await Promise.all(categories.map(async (category) => {
