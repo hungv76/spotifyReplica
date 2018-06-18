@@ -26,7 +26,7 @@ class HomeScreen extends Component {
   }
 
   async getCategoriesData() {
-    const authToken = 'Bearer BQDtyG9P-jYfIpzIGPAh7X9sI0rCp7TM0VAEyi71n6dnr7CYWN5z18KSFvovqEfKNvv7RSgqrfRik_vCPQs';
+    const authToken = 'Bearer BQD4MoR40KupsVPA25coFnwwCk_hd4siqxg_gBnKv93zy-E-B5nyJEVQ7sAen-Lp0l_8RHk9BkaS0gk5nng';
     const categories = await axios({
       method: 'get',
       headers: {

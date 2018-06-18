@@ -7,20 +7,28 @@ import {
 } from 'react-native';
 
 import RoundedButton from './components/RoundedButton';
+import ListItem from './components/ListItem';
 
 class DetailsScreen extends Component {
   static navigationOptions = {
     title: 'Songs',
   }
 
-  _renderListItem({ item }) {
+  _renderListItem(item) {
+    const reducer = (accumulator, currentValue) => accumulator + ', ' + currentValue.name;
 
+    return (
+      <ListItem
+        title={item.track.name}
+        subTitle={(item.track.artists.reduce(reducer, '')).slice(2)}
+      />
+    )
   }
 
   render() {
     const { navigation } = this.props;
     const { tracks } = navigation.getParam('playlist', []);
-    console.log(JSON.stringify(tracks.items));
+    console.log(tracks.items);
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#121212' }}>
         <View style={{
@@ -41,33 +49,20 @@ class DetailsScreen extends Component {
         <View style={{
           flex: 1,
           alignSelf: 'stretch',
-          // backgroundColor: '#2AB758',
           flexDirection: 'row',
         }}
         >
-          <View
-            style={{
-              backgroundColor: '#2AB758',
-              flex: 1,
-              height: 62,
-            }}
-          >
-            <Text style={{ color: 'white' }}>
-              Title of Song
-            </Text>
-            <View>
-            </View>
-          </View>
-          {/* <FlatList
+          <FlatList
             style={{
               flex: 1,
-              backgroundColor: 'blue',
-
+              marginLeft: 15,
+              marginRight: 15,
             }}
             data={tracks.items}
             ListHeaderComponent={<Text>The Header</Text>}
-            renderItem={({ item }) => <Text>{item.track.name}</Text>}
-          /> */}
+            renderItem={({ item }) => this._renderListItem(item)}
+            keyExtractor={item => item.track.id}
+          />
         </View>
 
 
