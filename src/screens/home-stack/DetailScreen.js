@@ -14,15 +14,15 @@ class DetailsScreen extends Component {
     title: 'Songs',
   }
 
-  _renderListItem(item) {
-    const reducer = (accumulator, currentValue) => accumulator + ', ' + currentValue.name;
+  static renderListItem(item) {
+    const reducer = (accumulator, currentValue) => `${accumulator}, ${currentValue.name}`;
 
     return (
       <ListItem
         title={item.track.name}
         subTitle={(item.track.artists.reduce(reducer, '')).slice(2)}
       />
-    )
+    );
   }
 
   render() {
@@ -60,7 +60,7 @@ class DetailsScreen extends Component {
             }}
             data={tracks.items}
             ListHeaderComponent={<Text>The Header</Text>}
-            renderItem={({ item }) => this._renderListItem(item)}
+            renderItem={({ item }) => this.constructor.renderListItem(item)}
             keyExtractor={item => item.track.id}
           />
         </View>
