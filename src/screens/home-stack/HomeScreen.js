@@ -5,6 +5,7 @@ import {
   ScrollView,
 } from 'react-native';
 import axios from 'axios';
+import SpotifyHelper from './../../services/spotify-helper';
 
 import HorizontalPlaylistList from './components/HorizontalPlaylistList';
 
@@ -23,6 +24,9 @@ class HomeScreen extends Component {
     super(props);
     this.state = {};
     this.getCategoriesData();
+    let a = new SpotifyHelper();
+    a.config({ clientID: '6d7992cba8f647599883a386e368bc9c', clientSecret: 'b8e310c5227b48bebd7a6825086dff16' });
+    a.getAccessToken();
   }
 
   async getCategoriesData() {
