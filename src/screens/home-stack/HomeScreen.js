@@ -23,10 +23,22 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.getCategoriesData();
-    let a = new SpotifyHelper();
-    a.config({ clientID: '6d7992cba8f647599883a386e368bc9c', clientSecret: 'b8e310c5227b48bebd7a6825086dff16' });
-    a.getAccessToken();
+    // this.getCategoriesData();
+    this.getAccessTokenNew();
+  }
+
+  async getAccessTokenNew() {
+    let spotifyHelper = new SpotifyHelper();
+    spotifyHelper.config({ clientID: '6d7992cba8f647599883a386e368bc9c', clientSecret: 'b8e310c5227b48bebd7a6825086dff16' });
+    this.setState({});
+
+    await spotifyHelper.getAccessToken();
+    spotifyHelper.getCategories()
+      .then((categories) => {
+        spotifyHelper.getPlayList(categories[0].id);
+      });
+
+    // console.log('got the access token 1');
   }
 
   async getCategoriesData() {

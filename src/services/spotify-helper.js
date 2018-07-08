@@ -3,7 +3,7 @@ import qs from 'qs';
 
 class SpotifyHelper {
   constructor() {
-    this.token = '';
+    this.accessToken = '';
   }
 
   config(setting) {
@@ -11,9 +11,40 @@ class SpotifyHelper {
     this.clientSecret = setting.clientSecret;
   }
 
-  getAccessToken() {
+  getCategories(limit = 5) {
+    const option = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+      url: `https://api.spotify.com/v1/browse/categories?&limit=${limit}`,
+    };
+    return axios(option)
+      .then((response) => {
+        console.log(response.data);
+        return response.data.categories.items;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  getPlayList(categoryID) {
+    const option = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+      url: `https://api.spotify.com/v1/browse/categories/${categoryID}/playlists?limit=10`,
+    };
+    return axios(option)
+      .then((response) => {
+        console.log(response.data);
+      });
+  }
+
+  async getAccessToken() {
     const base64Encoded = btoa(`${this.clientID}:${this.clientSecret}`);
-    console.log(base64Encoded);
     const data = {
       grant_type: 'client_credentials',
     };
@@ -27,12 +58,15 @@ class SpotifyHelper {
       data: qs.stringify(data),
     };
 
-    axios(option)
+    await axios(option)
       .then((response) => {
-        // this.accessToken = response.data.
         console.log(response);
+        this.accessToken = response.data.access_token;
+        return new Promise((resolve) => {
+          resolve();
+        });
       }).catch((error) => {
-        console.log(error.data);
+        console.log(error.response);
       });
   }
 }
