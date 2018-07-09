@@ -21,7 +21,6 @@ class SpotifyHelper {
     };
     return axios(option)
       .then((response) => {
-        console.log(response.data);
         return response.data.categories.items;
       })
       .catch((error) => {
@@ -39,11 +38,14 @@ class SpotifyHelper {
     };
     return axios(option)
       .then((response) => {
-        console.log(response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        throw error;
       });
   }
 
-  async getAccessToken() {
+  getAccessToken() {
     const base64Encoded = btoa(`${this.clientID}:${this.clientSecret}`);
     const data = {
       grant_type: 'client_credentials',
@@ -58,15 +60,13 @@ class SpotifyHelper {
       data: qs.stringify(data),
     };
 
-    await axios(option)
+    return axios(option)
       .then((response) => {
-        console.log(response);
         this.accessToken = response.data.access_token;
-        return new Promise((resolve) => {
-          resolve();
-        });
-      }).catch((error) => {
-        console.log(error.response);
+        return response.data.access_token;
+      })
+      .catch((error) => {
+        throw error;
       });
   }
 }

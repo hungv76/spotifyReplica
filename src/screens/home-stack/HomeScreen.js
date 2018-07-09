@@ -32,12 +32,15 @@ class HomeScreen extends Component {
     spotifyHelper.config({ clientID: '6d7992cba8f647599883a386e368bc9c', clientSecret: 'b8e310c5227b48bebd7a6825086dff16' });
     this.setState({});
 
-    await spotifyHelper.getAccessToken();
-    spotifyHelper.getCategories()
+    spotifyHelper.getAccessToken()
+      .then(() => spotifyHelper.getCategories())
       .then((categories) => {
-        spotifyHelper.getPlayList(categories[0].id);
+        return spotifyHelper.getPlayList(categories[0].id);
+      })
+      .then((playlists) => { console.log(playlists); })
+      .catch((error) => {
+        console.log(error);
       });
-
     // console.log('got the access token 1');
   }
 
