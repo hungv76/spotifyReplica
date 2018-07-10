@@ -23,55 +23,34 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    // this.getCategoriesData();
     this.getAccessTokenNew();
   }
 
   async getAccessTokenNew() {
     let spotifyHelper = new SpotifyHelper();
     spotifyHelper.config({ clientID: '6d7992cba8f647599883a386e368bc9c', clientSecret: 'b8e310c5227b48bebd7a6825086dff16' });
-    this.setState({});
 
     spotifyHelper.getAccessToken()
       .then(() => spotifyHelper.getCategories())
       .then((categories) => {
-        return spotifyHelper.getPlayList(categories[0].id);
+        let newCategoriesPromise = Promise.all(categories.map((category) => {
+          return spotifyHelper.getPlayList(category.id)
+            .then((playlist) => {
+              let newCategory = JSON.parse(JSON.stringify(category));
+              newCategory.playlist = playlist;
+              return newCategory;
+            });
+        }));
+
+        newCategoriesPromise.then((newCategories) => {
+          this.setState({
+            categories: newCategories,
+          });
+        });
       })
-      .then((playlists) => { console.log(playlists); })
       .catch((error) => {
         console.log(error);
       });
-    // console.log('got the access token 1');
-  }
-
-  async getCategoriesData() {
-    const authToken = 'Bearer BQAQQ-KIrPdf4BlLBPJKpcLKradKtmP2ISc4Zt70wfesINpDTgNEI0b5nsaw8viw5Xut9AZhBtd3sT_Uoao';
-    const categories = await axios({
-      method: 'get',
-      headers: {
-        Authorization: authToken,
-      },
-      url: 'https://api.spotify.com/v1/browse/categories?&limit=5',
-    }).then(response => response.data.categories.items);
-
-    const newCategories = await Promise.all(categories.map(async (category) => {
-      let playlist = await axios({
-        method: 'get',
-        headers: {
-          Authorization: authToken,
-        },
-        url: `https://api.spotify.com/v1/browse/categories/${category.id}/playlists?limit=10`,
-      }).then(response => response.data.playlists.items)
-        .catch(error => console.log(error.response));
-
-      let newCategory = JSON.parse(JSON.stringify(category));
-      newCategory.playlist = playlist;
-      return newCategory;
-    }));
-
-    this.setState({
-      categories: newCategories,
-    });
   }
 
   renderCategories() {

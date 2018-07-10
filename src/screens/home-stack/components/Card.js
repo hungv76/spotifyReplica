@@ -22,7 +22,7 @@ class Card extends Component {
   }
 
   async getPlaylistData() {
-    const authToken = 'Bearer BQAQQ-KIrPdf4BlLBPJKpcLKradKtmP2ISc4Zt70wfesINpDTgNEI0b5nsaw8viw5Xut9AZhBtd3sT_Uoao';
+    const authToken = 'Bearer BQBN7VM5OyLpSikeN9pVFMofSkOfNCPhUf2xBf7tioDDq2jXpKYHOH8NaPxQD226Dw_O8IgKYnbgrGugqbg';
     let { playlistID } = this.props;
     let playlist = await axios({
       method: 'get',

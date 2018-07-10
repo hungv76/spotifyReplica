@@ -38,7 +38,7 @@ class SpotifyHelper {
     };
     return axios(option)
       .then((response) => {
-        return response.data;
+        return response.data.playlists.items;
       })
       .catch((error) => {
         throw error;
