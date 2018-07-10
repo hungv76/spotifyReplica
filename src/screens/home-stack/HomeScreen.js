@@ -4,7 +4,6 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import axios from 'axios';
 import SpotifyHelper from './../../services/spotify-helper';
 
 import HorizontalPlaylistList from './components/HorizontalPlaylistList';
@@ -34,7 +33,7 @@ class HomeScreen extends Component {
       .then(() => spotifyHelper.getCategories())
       .then((categories) => {
         let newCategoriesPromise = Promise.all(categories.map((category) => {
-          return spotifyHelper.getPlayList(category.id)
+          return spotifyHelper.getPlayListsByCategoryID(category.id)
             .then((playlist) => {
               let newCategory = JSON.parse(JSON.stringify(category));
               newCategory.playlist = playlist;
@@ -42,11 +41,12 @@ class HomeScreen extends Component {
             });
         }));
 
-        newCategoriesPromise.then((newCategories) => {
-          this.setState({
-            categories: newCategories,
+        newCategoriesPromise
+          .then((newCategories) => {
+            this.setState({
+              categories: newCategories,
+            });
           });
-        });
       })
       .catch((error) => {
         console.log(error);
