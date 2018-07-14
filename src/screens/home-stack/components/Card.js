@@ -25,10 +25,8 @@ class Card extends Component {
   }
 
   getPlaylistDataNew() {
-    let spotifyHelper = new SpotifyHelper();
-    spotifyHelper.config({ clientID: '6d7992cba8f647599883a386e368bc9c', clientSecret: 'b8e310c5227b48bebd7a6825086dff16' });
     let { playlistID } = this.props;
-    spotifyHelper.getSongsByPlayListID(playlistID)
+    SpotifyHelper.getSongsByPlayListID(playlistID)
       .then((playlist) => {
         this.setState({ playlist });
       })

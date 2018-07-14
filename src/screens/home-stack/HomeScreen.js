@@ -26,14 +26,12 @@ class HomeScreen extends Component {
   }
 
   async getAccessTokenNew() {
-    let spotifyHelper = new SpotifyHelper();
-    spotifyHelper.config({ clientID: '6d7992cba8f647599883a386e368bc9c', clientSecret: 'b8e310c5227b48bebd7a6825086dff16' });
+    SpotifyHelper.config({ clientID: '6d7992cba8f647599883a386e368bc9c', clientSecret: 'b8e310c5227b48bebd7a6825086dff16' });
 
-    spotifyHelper.getAccessToken()
-      .then(() => spotifyHelper.getCategories())
+    SpotifyHelper.getCategories()
       .then((categories) => {
         let newCategoriesPromise = Promise.all(categories.map((category) => {
-          return spotifyHelper.getPlayListsByCategoryID(category.id)
+          return SpotifyHelper.getPlayListsByCategoryID(category.id)
             .then((playlist) => {
               let newCategory = JSON.parse(JSON.stringify(category));
               newCategory.playlist = playlist;

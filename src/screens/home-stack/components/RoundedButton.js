@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 
 class RoundedButton extends Component {
   render() {
     return (
       <TouchableOpacity style={[{
-        
         backgroundColor: '#418bca',
         height: 48,
         width: 212,

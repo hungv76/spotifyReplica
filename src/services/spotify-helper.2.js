@@ -1,14 +1,16 @@
 import axios from 'axios';
 import qs from 'qs';
 
-const SpotifyHelper = {
-  access_token: '',
-  expireTime: 0,
+class SpotifyHelper {
+  constructor() {
+    this.accessToken = '';
+    this.expireTime = 0;
+  }
 
   config(setting) {
     this.clientID = setting.clientID;
     this.clientSecret = setting.clientSecret;
-  },
+  }
 
   isAccessTokenValid() {
     if (this.expireTime === 0) {
@@ -20,7 +22,7 @@ const SpotifyHelper = {
     }
 
     return true;
-  },
+  }
 
   async enableAccessToken() {
     if (this.isAccessTokenValid()) {
@@ -31,7 +33,7 @@ const SpotifyHelper = {
     console.log('Access Token expired, refreshing...');
     await this.getAccessToken();
     console.log('get token done');
-  },
+  }
 
   async getCategories(limit = 5) {
     await this.enableAccessToken();
@@ -49,7 +51,7 @@ const SpotifyHelper = {
       .catch((error) => {
         throw error;
       });
-  },
+  }
 
   async getPlayListsByCategoryID(categoryID) {
     await this.enableAccessToken();
@@ -67,7 +69,7 @@ const SpotifyHelper = {
       .catch((error) => {
         throw error;
       });
-  },
+  }
 
   async getSongsByPlayListID(playlistID) {
     await this.enableAccessToken();
@@ -93,9 +95,9 @@ const SpotifyHelper = {
       .catch((error) => {
         throw error;
       });
-  },
+  }
 
-  async getAccessToken() {
+  getAccessToken() {
     const base64Encoded = btoa(`${this.clientID}:${this.clientSecret}`);
     const data = {
       grant_type: 'client_credentials',
@@ -119,7 +121,7 @@ const SpotifyHelper = {
       .catch((error) => {
         throw error;
       });
-  },
-};
+  }
+}
 
 export default SpotifyHelper;
