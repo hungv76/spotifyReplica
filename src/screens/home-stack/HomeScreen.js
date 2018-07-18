@@ -92,7 +92,6 @@ class HomeScreen extends Component {
           {this.renderCategories()}
         </View>
       </ScrollView>
-
     );
   }
 }

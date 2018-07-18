@@ -35,28 +35,6 @@ class Card extends Component {
       });
   }
 
-  async getPlaylistData() {
-    const authToken = 'Bearer BQBN7VM5OyLpSikeN9pVFMofSkOfNCPhUf2xBf7tioDDq2jXpKYHOH8NaPxQD226Dw_O8IgKYnbgrGugqbg';
-    let { playlistID } = this.props;
-    let playlist = await axios({
-      method: 'get',
-      headers: {
-        Authorization: authToken,
-      },
-      url: `https://api.spotify.com/v1/users/spotify/playlists/${playlistID}`,
-    }).then((response) => {
-      let { description, followers, tracks, images, name } = response.data;
-      return {
-        description,
-        tracks,
-        images,
-        name,
-        followers: followers.total,
-      };
-    });
-    return playlist;
-  }
-
   handleOnPress() {
     this.props.navigation.navigate('Details', { playlist: this.state.playlist });
   }

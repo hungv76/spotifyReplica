@@ -3,6 +3,7 @@ import {
   Text,
   View,
   Button,
+  Switch,
   FlatList,
 } from 'react-native';
 
@@ -10,6 +11,7 @@ import RoundedButton from './components/RoundedButton';
 import ListItem from './components/ListItem';
 
 class DetailsScreen extends Component {
+
   static navigationOptions = {
     title: 'Songs',
   }
@@ -24,7 +26,16 @@ class DetailsScreen extends Component {
       />
     );
   }
+  constructor(props) {
+    super(props);
+    this.state = { toggleValue: false };
+    this.handleToggle = this.handleToggle.bind(this);
+  }
 
+  handleToggle(event) {
+    console.log(event);
+    this.setState({ toggleValue: event });
+  }
   render() {
     const { navigation } = this.props;
     const { tracks } = navigation.getParam('playlist', []);
@@ -59,7 +70,22 @@ class DetailsScreen extends Component {
               marginRight: 15,
             }}
             data={tracks.items}
-            ListHeaderComponent={<Text>The Header</Text>}
+            ListHeaderComponent={
+              <View style={{
+                // backgroundColor: 'gray',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                height: 62,
+              }}
+              >
+                <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>Downloaded</Text>
+                <Switch
+                  onValueChange={this.handleToggle}
+                  value={this.state.toggleValue}
+                />
+              </View>
+            }
             renderItem={({ item }) => this.constructor.renderListItem(item)}
             keyExtractor={item => item.track.id}
           />
