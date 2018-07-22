@@ -5,7 +5,6 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import axios from 'axios';
 
 import SpotifyHelper from './../../../services/spotify-helper';
 

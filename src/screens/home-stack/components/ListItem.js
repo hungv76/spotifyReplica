@@ -5,9 +5,23 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 class ListItem extends Component {
+  constructor(props) {
+    super(props);
+    this.onPress = this.onPress.bind(this);
+  }
+
+  onPress() {
+    console.log(`pressed ${this.props.id}`);
+    console.log(`selected? ${this.props.isSelected}`);
+    this.props.onPressItem(this.props.id);
+  }
+
   render() {
+    const textColor = this.props.isSelected ? '#2AB758' : 'white';
     return (
-      <View
+
+      <TouchableOpacity
+        onPress={this.onPress}
         style={{
           flex: 1,
           flexDirection: 'row',
@@ -26,7 +40,7 @@ class ListItem extends Component {
             <Text
               numberOfLines={1}
               style={{
-                color: 'white',
+                color: textColor,
                 fontSize: 16,
                 position: 'absolute',
                 bottom: 2,
@@ -76,7 +90,7 @@ class ListItem extends Component {
           </TouchableOpacity>
         </View>
 
-      </View >
+      </TouchableOpacity >
     );
   }
 }
