@@ -3,8 +3,6 @@ import React, {
 } from 'react';
 import {
   View,
-  Text,
-  Switch,
   FlatList,
 
 } from 'react-native';

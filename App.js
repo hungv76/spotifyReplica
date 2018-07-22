@@ -14,8 +14,17 @@ import {
 import HomeScreen from './src/screens/home-stack/HomeScreen';
 import DetailsScreen from './src/screens/home-stack/DetailScreen';
 import ArtistScreen from './src/screens/artist-stack/ArtistScreen';
-import TopSongScreen from './src/screens/top-song-stack/TopSongScreen';
+import BrowseScreen from './src/screens/browse-stack/BrowseScreen';
 import MyScreen from './src/screens/MyScreen';
+
+const HeaderBarOption = {
+  headerStyle: {
+    backgroundColor: '#282828',
+    borderBottomWidth: 0,
+  },
+  headerTintColor: '#fff',
+  headerBackTitle: null,
+};
 
 const HomeStack = createStackNavigator(
   {
@@ -23,15 +32,18 @@ const HomeStack = createStackNavigator(
     Details: DetailsScreen,
   },
   {
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: '#282828',
-        borderBottomWidth: 0,
-      },
-      headerTintColor: '#fff',
-      headerBackTitle: null,
-    },
+    navigationOptions: HeaderBarOption,
     initialRouteName: 'Home',
+  },
+);
+
+const BrowseStack = createStackNavigator(
+  {
+    Browse: BrowseScreen,
+  },
+  {
+    navigationOptions: HeaderBarOption,
+    initialRouteName: 'Browse',
   },
 );
 
@@ -46,8 +58,8 @@ class App extends Component {
 const Tabs = createBottomTabNavigator(
   {
     Home: HomeStack,
+    Browse: BrowseStack,
     Artist: ArtistScreen,
-    'Top Song': TopSongScreen,
     'My Page': MyScreen,
   },
   {
