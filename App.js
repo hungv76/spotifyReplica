@@ -5,7 +5,10 @@
  */
 
 import React, { Component } from 'react';
-import { } from 'react-native';
+import {
+  StatusBar,
+  View,
+} from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -50,7 +53,13 @@ const BrowseStack = createStackNavigator(
 class App extends Component {
   render() {
     return (
-      <Tabs />
+      <View style={{ flex: 1 }}>
+        <StatusBar
+          barStyle="light-content"
+        />
+        <Tabs />
+      </View>
+
     );
   }
 }

@@ -33,7 +33,7 @@ const SpotifyHelper = {
     console.log('get token done');
   },
 
-  async getCategories(limit = 2) {
+  async getCategories(limit = 5) {
     await this.enableAccessToken();
     const option = {
       method: 'GET',
