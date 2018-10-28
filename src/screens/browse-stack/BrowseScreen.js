@@ -13,8 +13,8 @@ import Styles from './../../style/styles';
 import GenreCard from './components/GenreCard';
 
 const browseScreenStyles = {
-  flex: 1,
-  flexDirection: 'column',
+  // flex: 1,
+  // flexDirection: 'row',
   backgroundColor: '#121212',
 };
 const genreList = [
@@ -72,23 +72,58 @@ class BrowseScreen extends Component {
         image={genre.image}
         key={genre.id}
       />
-    ))
+    ));
   }
   render() {
     return (
-      <ScrollView style={browseScreenStyles}>
-        <View style={{
-          flexWrap: 'wrap',
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          // alignContent: 'space-between',
-        }}
-        >
+
+      // <View>
+      //   <View
+      //     style={{
+      //       // flexDirection: 'column',
+      //       // flexWrap: 'wrap',
+      //       backgroundColor: 'red'
+      //     }}
+      //   >
+      //     <Text>Hello</Text>
+      //   </View>
+
+      //   <ScrollView style={browseScreenStyles}>
+
+      //     <View
+      //       style={{
+      //         // flexDirection: 'column',
+      //         // flexWrap: 'wrap',
+      //         backgroundColor: 'white'
+      //       }}
+      //     >
+      //       {this.renderGenreList()}
+      //     </View>
+      //   </ScrollView>
+      // </View>
+      <View
+        style={{
+          flex: 1,
+          // justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'blue',
+        }}>
+        <View
+          style={{
+            // justifyContent: 'center',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            // alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            backgroundColor: "cyan",
+            width: 360,
+          }}>
           {this.renderGenreList()}
 
-
         </View>
-      </ScrollView>
+      </View>
+
+
     );
   }
 }

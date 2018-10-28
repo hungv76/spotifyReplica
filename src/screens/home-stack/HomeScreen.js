@@ -28,7 +28,7 @@ class HomeScreen extends Component {
   async getAccessTokenNew() {
     SpotifyHelper.config({ clientID: '6d7992cba8f647599883a386e368bc9c', clientSecret: 'b8e310c5227b48bebd7a6825086dff16' });
 
-    SpotifyHelper.getCategories(5)
+    SpotifyHelper.getCategories(3)
       .then((categories) => {
         let newCategoriesPromise = Promise.all(categories.map((category) => {
           return SpotifyHelper.getPlayListsByCategoryID(category.id)

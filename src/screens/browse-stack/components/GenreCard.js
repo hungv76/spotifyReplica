@@ -12,34 +12,39 @@ const { width, height } = Dimensions.get('window');
 class GenreCard extends Component {
   render() {
     return (
-      <TouchableOpacity>
-        <View
+      <TouchableOpacity
+        style={{
+          height: 170,
+          width: 170,
+          alignItems: 'center',
+        }}
+      >
+
+        <Image
+          source={{ uri: this.props.image }}
           style={{
-            // flex: 1,
-            alignItems: 'stretch',
+            flexGrow: 1,
+            height: 170,
+            width: 170,
+            alignItems: 'center',
             justifyContent: 'center',
+            // marginTop: 10,
+
+          }}
+        />
+        <Text
+          style={{
+            fontSize: 15,
+            fontWeight: 'bold',
+            color: 'white',
+            textAlign: 'center',
+            position: 'absolute',
+            bottom: 10,
+
           }}
         >
-          <Image
-            source={{ uri: this.props.image }}
-            style={{
-              flexGrow: 1,
-              height: 160,
-              width: 160,
-              alignItems: 'center',
-              justifyContent: 'center',
-              // marginTop: 10,
-
-            }}
-          />
-          <Text
-            style={{
-              textAlign: 'center',
-            }}>
-            Title
-          </Text>
-        </View>
-
+          {this.props.id.charAt(0).toUpperCase() + this.props.id.slice(1)}
+        </Text>
       </TouchableOpacity>
     );
   }
