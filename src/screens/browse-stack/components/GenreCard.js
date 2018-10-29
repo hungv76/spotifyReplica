@@ -3,20 +3,21 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
-  View,
   Text,
 } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+const { width: screenWidth } = Dimensions.get('window');
 
 class GenreCard extends Component {
   render() {
+    let genreCardWidth = (screenWidth * 0.9) / 2;
     return (
       <TouchableOpacity
         style={{
-          height: 170,
-          width: 170,
+          height: genreCardWidth,
+          width: genreCardWidth,
           alignItems: 'center',
+          marginTop: screenWidth * 0.03,
         }}
       >
 
@@ -24,8 +25,8 @@ class GenreCard extends Component {
           source={{ uri: this.props.image }}
           style={{
             flexGrow: 1,
-            height: 170,
-            width: 170,
+            height: genreCardWidth,
+            width: genreCardWidth,
             alignItems: 'center',
             justifyContent: 'center',
             // marginTop: 10,
@@ -39,8 +40,7 @@ class GenreCard extends Component {
             color: 'white',
             textAlign: 'center',
             position: 'absolute',
-            bottom: 10,
-
+            bottom: screenWidth * 0.06,
           }}
         >
           {this.props.id.charAt(0).toUpperCase() + this.props.id.slice(1)}
