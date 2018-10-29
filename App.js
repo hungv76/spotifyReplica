@@ -19,6 +19,7 @@ import DetailsScreen from './src/screens/home-stack/DetailScreen';
 import ArtistScreen from './src/screens/artist-stack/ArtistScreen';
 import BrowseScreen from './src/screens/browse-stack/BrowseScreen';
 import MyScreen from './src/screens/MyScreen';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const HeaderBarOption = {
   headerStyle: {
@@ -64,12 +65,39 @@ class App extends Component {
   }
 }
 
+function tabBarIconGen(iconName) {
+  return {
+    tabBarIcon: ({ tintColor }) => (
+      <Ionicons
+        name={iconName}
+        size={25}
+        color={tintColor}
+      />
+    ),
+  };
+}
+
+
 const Tabs = createBottomTabNavigator(
   {
-    Home: HomeStack,
-    Browse: BrowseStack,
-    Artist: ArtistScreen,
-    'My Page': MyScreen,
+    Home: {
+      screen: HomeStack,
+      navigationOptions: tabBarIconGen('ios-home'),
+    },
+    Browse: {
+      screen: BrowseStack,
+      navigationOptions: tabBarIconGen('ios-musical-notes'),
+
+    },
+    Artist: {
+      screen: ArtistScreen,
+      navigationOptions: tabBarIconGen('ios-contact'),
+
+    },
+    Settings: {
+      screen: MyScreen,
+      navigationOptions: tabBarIconGen('ios-settings'),
+    },
   },
   {
     tabBarOptions: {
@@ -81,5 +109,6 @@ const Tabs = createBottomTabNavigator(
     },
   },
 );
+
 
 export default App;
