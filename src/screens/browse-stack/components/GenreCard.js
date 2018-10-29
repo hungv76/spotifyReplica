@@ -10,14 +10,14 @@ const { width: screenWidth } = Dimensions.get('window');
 
 class GenreCard extends Component {
   render() {
-    let genreCardWidth = (screenWidth * 0.9) / 2;
+    let genreCardWidth = screenWidth * 0.425;
     return (
       <TouchableOpacity
         style={{
           height: genreCardWidth,
           width: genreCardWidth,
           alignItems: 'center',
-          marginTop: screenWidth * 0.03,
+          marginTop: screenWidth * 0.05,
         }}
       >
 

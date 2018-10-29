@@ -28,7 +28,7 @@ class GenrePanel extends Component {
           // alignItems: 'flex-start',
           justifyContent: 'space-between',
           // backgroundColor: 'cyan',
-          width: screenWidth * 0.93,
+          width: screenWidth * 0.9,
         }}
       >
         {this.renderGenreList()}
