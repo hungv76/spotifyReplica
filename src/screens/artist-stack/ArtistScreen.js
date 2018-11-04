@@ -108,6 +108,7 @@ class ArtistScreen extends Component {
           backgroundColor: '#2AB759',
           height: headerHeight,
           overflow: 'hidden',
+          
         }}
         >
           <Animated.Image
@@ -128,6 +129,22 @@ class ArtistScreen extends Component {
               { opacity: imageOpacity, transform: [{ translateY: imageTranslate }] },
             ]}
           />
+          <View style={{
+            marginTop: 25,
+            height: 32,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          >
+
+            <Text style={{
+              color: 'white',
+              fontSize: 18,
+            }}
+            >
+              Title
+            </Text>
+          </View>
         </Animated.View>
 
       </View >
