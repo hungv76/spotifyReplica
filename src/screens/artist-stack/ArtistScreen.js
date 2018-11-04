@@ -4,7 +4,6 @@ import {
   View,
   ScrollView,
   Animated,
-  Image,
 } from 'react-native';
 
 const HEADER_DEFAULT_HEIGHT = 200;
@@ -59,7 +58,7 @@ class ArtistScreen extends Component {
     });
     const imageTranslate = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
-      outputRange: [0, -50],
+      outputRange: [0, 0],
       extrapolate: 'clamp',
     });
     const headerHeight = this.state.scrollY.interpolate({
@@ -67,6 +66,12 @@ class ArtistScreen extends Component {
       outputRange: [HEADER_MAX_HEIGHT, HEADER_DEFAULT_HEIGHT, HEADER_MIN_HEIGHT],
       extrapolate: 'clamp',
     });
+    const imageScale = this.state.scrollY.interpolate({
+      inputRange: [-170, 0],
+      outputRange: [1.5, 1],
+      extrapolate: 'clamp',
+    });
+
     return (
       <View style={{
         flex: 1,
@@ -76,7 +81,7 @@ class ArtistScreen extends Component {
           style={{
             // backgroundColor: 'blue',
           }}
-          scrollEventThrottle={1}
+          scrollEventThrottle={10}
           onScroll={Animated.event(
             [{
               nativeEvent: {
@@ -87,7 +92,7 @@ class ArtistScreen extends Component {
             }],
             {
               listener: (event) => {
-                console.log(this.state.scrollY);
+                console.log(this.state.scrollY._value);
               },
             },
 
@@ -105,36 +110,24 @@ class ArtistScreen extends Component {
           overflow: 'hidden',
         }}
         >
-          <View style={{
-            marginTop: 28,
-            height: 32,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          >
-            <Animated.Image
-              source={{ uri: 'https://t.scdn.co/media/derived/pop-274x274_447148649685019f5e2a03a39e78ba52_0_0_274_274.jpg' }}
-              style={[
-                {
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  width: null,
-                  height: headerHeight,
-                  resizeMode: 'cover',
-                },
-                {opacity: imageOpacity, transform: [{translateY: imageTranslate}]},
-              ]}
-            />
-            <Text style={{
-              color: 'white',
-              fontSize: 18,
-            }}
-            >
-              Title
-            </Text>
-          </View>
+          <Animated.Image
+            source={{ uri: 'https://t.scdn.co/media/derived/pop-274x274_447148649685019f5e2a03a39e78ba52_0_0_274_274.jpg' }}
+            style={[
+              {
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                width: null,
+                height: '100%',
+                resizeMode: 'cover',
+                transform: [
+                  { scale: imageScale },
+                ],
+              },
+              { opacity: imageOpacity, transform: [{ translateY: imageTranslate }] },
+            ]}
+          />
         </Animated.View>
 
       </View >
