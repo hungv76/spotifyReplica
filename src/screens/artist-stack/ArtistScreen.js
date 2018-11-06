@@ -53,7 +53,7 @@ class ArtistScreen extends Component {
   render() {
     const imageOpacity = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-      outputRange: [1, 1, 0],
+      outputRange: [1, 1, 0.5],
       extrapolate: 'clamp',
     });
     const imageTranslate = this.state.scrollY.interpolate({
@@ -71,6 +71,16 @@ class ArtistScreen extends Component {
       outputRange: [1.5, 1],
       extrapolate: 'clamp',
     });
+    const titleTranslateY = this.state.scrollY.interpolate({
+      inputRange: [-170, 0, HEADER_SCROLL_DISTANCE],
+      outputRange: [170 / 2, 0, 25 - 70],
+      extrapolate: 'clamp',
+    })
+    const titleScale = this.state.scrollY.interpolate({
+      inputRange: [-170, 0, HEADER_SCROLL_DISTANCE],
+      outputRange: [1.5, 1, 0.8],
+      extrapolate: 'clamp',
+    })
 
     return (
       <View style={{
@@ -80,6 +90,8 @@ class ArtistScreen extends Component {
         <ScrollView
           style={{
             // backgroundColor: 'blue',
+            zIndex: 1,
+            // opacity: 0.2,
           }}
           scrollEventThrottle={10}
           onScroll={Animated.event(
@@ -94,6 +106,7 @@ class ArtistScreen extends Component {
               listener: (event) => {
                 console.log(this.state.scrollY._value);
               },
+              // useNativeDriver: true,
             },
 
           )}
@@ -101,6 +114,7 @@ class ArtistScreen extends Component {
           {this.renderList()}
         </ScrollView>
         <Animated.View style={{
+          zIndex: 2,
           position: 'absolute',
           top: 0,
           left: 0,
@@ -108,13 +122,16 @@ class ArtistScreen extends Component {
           backgroundColor: '#2AB759',
           height: headerHeight,
           overflow: 'hidden',
-          
+          transform: [
+            // { scale: imageScale },
+          ],
         }}
         >
           <Animated.Image
-            source={{ uri: 'https://t.scdn.co/media/derived/pop-274x274_447148649685019f5e2a03a39e78ba52_0_0_274_274.jpg' }}
+            source={{ uri: 'https://i.scdn.co/image/f1ff80245d4266f9eedc28c8a04b86ca9afdf776' }}
             style={[
               {
+                zIndex: 0,
                 position: 'absolute',
                 top: 0,
                 left: 0,
@@ -129,22 +146,27 @@ class ArtistScreen extends Component {
               { opacity: imageOpacity, transform: [{ translateY: imageTranslate }] },
             ]}
           />
-          <View style={{
-            marginTop: 25,
+          <Animated.View style={{
+            marginTop: 70,
             height: 32,
             alignItems: 'center',
             justifyContent: 'center',
+            // backgroundColor: 'red',
+            transform: [
+              { translateY: titleTranslateY },
+              { scale: titleScale },
+            ],
           }}
           >
-
             <Text style={{
               color: 'white',
-              fontSize: 18,
+              fontSize: 20,
+              fontWeight: '900',
             }}
             >
-              Title
+              POP
             </Text>
-          </View>
+          </Animated.View>
         </Animated.View>
 
       </View >
