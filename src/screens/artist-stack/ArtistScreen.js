@@ -57,8 +57,8 @@ class ArtistScreen extends Component {
       extrapolate: 'clamp',
     });
     const imageTranslate = this.state.scrollY.interpolate({
-      inputRange: [0, HEADER_SCROLL_DISTANCE],
-      outputRange: [0, 0],
+      inputRange: [-170, 0],
+      outputRange: [50, 0],
       extrapolate: 'clamp',
     });
     const headerHeight = this.state.scrollY.interpolate({
@@ -67,20 +67,20 @@ class ArtistScreen extends Component {
       extrapolate: 'clamp',
     });
     const imageScale = this.state.scrollY.interpolate({
-      inputRange: [-170, 0],
-      outputRange: [1.5, 1],
+      inputRange: [-170, 0, 170],
+      outputRange: [1.85, 1, 1],
       extrapolate: 'clamp',
     });
     const titleTranslateY = this.state.scrollY.interpolate({
       inputRange: [-170, 0, HEADER_SCROLL_DISTANCE],
       outputRange: [170 / 2, 0, 25 - 70],
       extrapolate: 'clamp',
-    })
+    });
     const titleScale = this.state.scrollY.interpolate({
       inputRange: [-170, 0, HEADER_SCROLL_DISTANCE],
       outputRange: [1.5, 1, 0.8],
       extrapolate: 'clamp',
-    })
+    });
 
     return (
       <View style={{
@@ -103,7 +103,7 @@ class ArtistScreen extends Component {
               },
             }],
             {
-              listener: (event) => {
+              listener: () => {
                 console.log(this.state.scrollY._value);
               },
               // useNativeDriver: true,
@@ -113,6 +113,26 @@ class ArtistScreen extends Component {
         >
           {this.renderList()}
         </ScrollView>
+        <Animated.Image
+          source={{ uri: 'https://i.scdn.co/image/f1ff80245d4266f9eedc28c8a04b86ca9afdf776' }}
+          style={[
+            {
+              zIndex: 0,
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              width: 360,
+              height: HEADER_DEFAULT_HEIGHT,
+              resizeMode: 'cover',
+              opacity: imageOpacity,
+              transform: [
+                { scale: imageScale },
+                { translateY: imageTranslate },
+              ],
+            },
+          ]}
+        />
         <Animated.View style={{
           zIndex: 2,
           position: 'absolute',
@@ -122,30 +142,13 @@ class ArtistScreen extends Component {
           backgroundColor: '#2AB759',
           height: headerHeight,
           overflow: 'hidden',
+          opacity: 0.5,
           transform: [
             // { scale: imageScale },
           ],
         }}
         >
-          <Animated.Image
-            source={{ uri: 'https://i.scdn.co/image/f1ff80245d4266f9eedc28c8a04b86ca9afdf776' }}
-            style={[
-              {
-                zIndex: 0,
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                width: null,
-                height: '100%',
-                resizeMode: 'cover',
-                transform: [
-                  { scale: imageScale },
-                ],
-              },
-              { opacity: imageOpacity, transform: [{ translateY: imageTranslate }] },
-            ]}
-          />
+
           <Animated.View style={{
             marginTop: 70,
             height: 32,
