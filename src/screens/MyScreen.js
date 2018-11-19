@@ -4,20 +4,34 @@ import {
   View,
   Button,
 } from 'react-native';
+import ParallaxView from 'react-native-parallax-view';
 
 import Styles from './../style/styles';
 
 class MyScreen extends Component {
   render() {
     return (
-      <View style={Styles.containerStyles} >
-        <Text>My Screen</Text>
-        <Button
-          title="Click me"
-          onPress={() => console.log('pressed!')}
-        />
-      </View>
-    );
+      < ParallaxView
+        backgroundSource={require('image!backgroundImage')}
+        windowHeight={300}
+        header={(
+          <Text style={
+            
+          }>
+            Header Content
+          </Text>
+        )
+        }
+        scrollableViewStyle={{ backgroundColor: 'red' }}
+      >
+        <View>
+          <Text>
+            Hello world
+          </Text>
+        </View>
+      </ParallaxView >
+
+    )
   }
 }
 

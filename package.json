@@ -11,6 +11,7 @@
     "qs": "^6.5.2",
     "react": "16.3.1",
     "react-native": "0.55.4",
+    "react-native-parallax-view": "^2.0.6",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.0.1"
   },
